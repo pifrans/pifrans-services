@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<div id="divLogo">
+		<span style="position: absolute; left: 90px; top: 0px;" id="spanLogo">
+			<h:graphicImage library="img" style="height: 85px;	width: 85px;"
+				name="svg/pifrans_logo_02.svg" id="ghiLogoMain"
+				styleClass="borderImage" />
+		</span>
+	</div>
+
+	<div id="divTopo">
+		<span id="spanDataLogin"> Usuario:
+			#{entityBeanView.userLoggedIn} <br /> Último acesso: <h:outputLabel
+				value="#{entityBeanView.lastAccess}" id="otlLastAccess">
+				<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss"
+					dateStyle="long" timeStyle="full" timeZone="GMT-03:00" />
+			</h:outputLabel> <br /> <a href="#"
+			onclick="javascript:logout('#{request.contextPath}')">Sair</a>
+		</span> <span id="spanMenuUser"
+			style="position: absolute; right: 25px; top: 48px; width: 20px;">
+			<a href="#" onclick="openMenuUser();"> <h:graphicImage
+					library="img" name="svg/arrow_down_02.svg" styleClass="borderImage"
+					id="ghiIconMenuUser" style="height: 15px; width: 15px;" />
+		</a>
+		
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+				style="margin-top:20px">
+				<p:submenu label="TV" icon="pi pi-check">
+					<p:column>
+						<p:submenu label="TV.1">
+							<p:menuitem value="TV.1.1" url="#" />
+							<p:menuitem value="TV.1.2" url="#" />
+						</p:submenu>
+					</p:column>
+				</p:submenu>
+			</p:megaMenu>
+		</span>
+	</div>
+</ui:composition>
+</html>

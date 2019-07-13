@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title><ui:insert name="title">Serviços</ui:insert></title>
+
+	<h:outputScript name="primefaces.js" library="primefaces"
+		id="otsPrimefaces" />
+	<h:outputScript name="jquery.js" library="primefaces/jquery"
+		id="otsJquery" />
+	<h:outputScript name="jquery-plugins.js" library="primefaces/jquery"
+		id="otsJqueryPlugin" />
+	<h:outputScript name="jquery.cookie.js" library="javascript"
+		id="otsJaqueryCookie" />
+	<h:outputStylesheet name="jquery-ui.css" library="primefaces/jquery/ui"
+		id="othJqueryUi" />
+	<h:outputStylesheet name="primefaces.css" library="primefaces"
+		id="othPrimefaces" />
+	<h:outputScript name="jquery.maskMoney.min.js" library="javascript"
+		id="otsJqueryMaskMoney" />
+	<h:outputScript name="jquery.maskedinput.js" library="javascript"
+		id="otsJqueryMaskedInput" />
+	<h:outputScript name="scriptMain.js" library="javascript"
+		id="otsScriptMain" />
+	<h:outputStylesheet name="styleMain.css" library="css"
+		id="othStyleMain" />
+</h:head>
+
+<h:form prependId="false" id="formInvalidateSession">
+	<script type="text/javascript" charset="UTF-8">
+		$.noConflit(); /* Evita conflito entre bibliotecas */
+	</script>
+
+	<h:body>
+		<div id="divMessageError" class="spaceEmpty">
+			<p:growl id="grlMessage" showDetail="false" sticky="true"
+				redisplay="true" autoUpdate="true" life="500" />
+		</div>
+
+		<p:dialog header="Encerrar sessão" widgetVar="dlgCloseSession"
+			resizable="false" modal="true" closable="false">
+			<h:panelGrid columns="2" cellpadding="5">
+				<h:outputLabel for="username" value="Usuário: " />
+				<p:inputText id="username" required="true" label="username"
+					requiredMessage="Informe o usuário!"
+					value="#{loginBeanView.username}" />
+
+				<h:outputLabel for="password" value="Senha: " />
+				<p:password id="password" required="true" label="password"
+					requiredMessage="Informe a senha!"
+					value="#{loginBeanView.password}" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Encerrar"
+						style="height: 40px; width: 100px; background: #CDCDC1; border: 1px solid #FFFFF;"
+						update="formInvalidateSession:grlMessage" ajax="true"
+						oncomplete="handleLoginRequest(xhr, status, args)"
+						actionListener="#{loginBeanView.invalidateSession}" />
+				</f:facet>
+			</h:panelGrid>
+		</p:dialog>
+	</h:body>
+
+	<script>
+		$(function(){
+			PF('dlgCloseSession').show();
+		});
+
+		function handleLoginRequest(xhr, status, args){
+			if (!args.loggedIn) {
+				PF('dlgCloseSession').jq.effect("shake"), {times: 5}, 100;
+			}else{
+				PF('dlgCloseSession').hide();
+				document.location = '#{request.contextPath}' + "/j_spring_security_logout"
+			}
+		}
+	</script>
+</h:form>
+</html>

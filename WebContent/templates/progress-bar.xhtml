@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition>
+	<p:ajaxStatus id="ajaxStatus" onstart="PF('statusDialogOk').show()" onsuccess="PF('statusDialogOk').hide()" />
+	
+	<p:dialog id="dlgAjaxStausOk" modal="true" widgetVar="statusDialogOk"
+		height="200px;" width="200px;" header="Processando"
+		footer="Aguarde..." draggable="false" appendTo="@(body)"
+		dynamic="false" resizable="false" closable="false">
+		<h:graphicImage library="img" name="svg/triple_gears_loading.svg" id="ghiLoader" styleClass="borderImage" style="height:60px" />
+	</p:dialog>
+
+	<p:dialog id="dlgAjaxStausError" modal="true"
+		widgetVar="statusDialogError" height="200px;" width="200px;"
+		header="Erro ao processar" footer="Erro" draggable="false"
+		appendTo="@(body)" dynamic="false" resizable="false" closable="true">
+		<h:graphicImage library="img" name="svg/erro_generic_02.svg" id="ghiLoaderError" styleClass="borderImage" />
+	</p:dialog>
+</ui:composition>
+</html>

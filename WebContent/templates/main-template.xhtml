@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:p="http://primefaces.org/ui">
+
+<sec:isAuthenticated>
+	<h:head>
+		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<title><ui:insert name="title">Serviços</ui:insert></title>
+
+		<h:outputScript name="primefaces.js" library="primefaces"
+			id="otsPrimefaces" />
+		<h:outputScript name="jquery.js" library="primefaces/jquery"
+			id="otsJquery" />
+		<h:outputScript name="jquery-plugins.js" library="primefaces/jquery"
+			id="otsJqueryPlugin" />
+		<h:outputScript name="jquery.cookie.js" library="javascript"
+			id="otsJaqueryCookie" />
+		<h:outputStylesheet name="jquery-ui.css"
+			library="primefaces/jquery/ui" id="othJqueryUi" />
+		<h:outputStylesheet name="primefaces.css" library="primefaces"
+			id="othPrimefaces" />
+		<h:outputScript name="jquery.maskMoney.min.js" library="javascript"
+			id="otsJqueryMaskMoney" />
+		<h:outputScript name="jquery.maskedinput.js" library="javascript"
+			id="otsJqueryMaskedInput" />
+		<h:outputScript name="scriptMain.js" library="javascript"
+			id="otsScriptMain" />
+	</h:head>
+
+
+	<h:form id="formHeader" prependId="false">
+		<h:outputStylesheet name="styleMain.css" library="css"
+			id="othStyleMain" />
+
+		<h:body>
+			<script type="text/javascript" charset="UTF-8">
+				$.noConflict();
+				localeDatePtBr();
+				initTamplete();
+				hideMenuLeft();
+
+				/* Bloqueia tecla F5 */
+				$(document).keydown(function(e){
+					if (e.which == 116) {
+						return 116
+					}
+				});
+			</script>
+
+			<ui:include src="/templates/progress-bar.xhtml" />
+
+			<div id="divMessageError">
+				<p:growl id="grlMessage" showDetail="false" sticky="true"
+					redisplay="true" autoUpdate="true" life="6000" />
+				<p:tooltip id="totFocus" globalSelector="a, :input, :button"
+					showEvent="focus" hideEvent="blur" />
+			</div>
+
+			<div id="divContainer">
+				<div id="divLogo">
+					<span style="position: absolute; left: 90px; top: 10px;"
+						id="spanLogo"> 
+						<h:graphicImage library="img" style="height: 150px;	width: 150px;"
+							name="svg/pifrans_logo_02.svg" id="ghiLogoMain"	styleClass="borderImage" />
+					</span> 
+				</div>
+				
+				<div id="divTopo">
+					
+					<span id="spanDataLogin"> 
+						Usuario: #{entityBeanView.userLoggedIn} 
+						<br /> 
+						
+						Último acesso: 
+						<h:outputLabel value="#{entityBeanView.lastAccess}" id="otlLastAccess" >
+							<f:convertDateTime locale="pt_BR" pattern="dd/MM/yyyy HH:mm:ss" dateStyle="long" timeStyle="full" timeZone="GMT-03:00"/>
+						</h:outputLabel> 
+						<br />
+						
+						<a href="#" onclick="javascript:logout('#{request.contextPath}')">Sair</a>
+					</span>
+					
+					<span id="spanMenuUser" style="position: absolute; right: 25px; top: 48px; width: 20px;">
+						<a href="#" onclick="openMenuUser();">
+							<h:graphicImage library="img" name="svg/arrow_down_02.svg" styleClass="borderImage" id="ghiIconMenuUser" 
+								style="height: 15px; width: 15px;"/>
+						</a>
+					</span>
+				</div>
+				
+				<div id="divIconMenuLeft">
+					<span id="spanIconMenuLeft">
+						<h:graphicImage library="img" name="svg/menu_01.svg"  style="width: 15px;"  styleClass="borderImage" id="ghiIconMenuLeft">
+							Menu
+						</h:graphicImage>
+					</span>
+				</div>
+				
+				<div id="divBody" class="divBody">
+					<ui:insert name="body" />
+				</div>
+				
+				<div id="divMenuUser">
+					<sec:ifAnyGranted roles="MESSAGE_ACCESS, ADMIN">
+						<p:commandLink actionListener="#{messageBeanView.create}" value="Enviar mensagem" immediate="true" 
+							style="display: block;" id="cmlSendMessage" ajax="true" process="@this" onsuccess="PF('dialogSendMessage').show();">
+							<p:ajax immediate="true" listener="#{messageBeanView.create}"/>
+						</p:commandLink>
+						
+						<a href='#' onclick="PF('dialogSendMessage').show();" style="display: block;">
+							<span style="display: block; ">Enviar mensagem</span>
+						</a>
+						
+					</sec:ifAnyGranted>
+					
+					<a href='#' onclick="PF('dialogChangePassword').show();" style="display: block;">
+						<span style="display: block; ">Alterar senha</span>
+					</a>
+				</div>
+				
+				<div id="divMenuLeft">
+					<p:tieredMenu id="trmLeft" style="width: 185px; border: none; background: none; color: #000;">
+						<p:menuitem id="mntStart" value="Início" ajax="true" onclick="redirectPage('#{request.contextPath}', '/restricted/main');"/>
+						<p:menuitem id="mntExit" value="Sair" ajax="true" onclick="javascript:logout('#{request.contextPath}')"/>
+					</p:tieredMenu>
+				</div>
+			</div>
+			
+			<!-- Dialogs -->
+			<p:dialog widgetVar="dialogSendMessage" width="800" modal="true" resizable="false"
+				height="360" header="Enviar mensagem" >
+				<h:outputText value="This dialog has nice effects." />
+			</p:dialog>
+			
+			<p:dialog widgetVar="dialogChangePassword" width="240" modal="true" resizable="false"
+				height="170" header="Alterar senha" >
+				<h:outputText value="This dialog has nice effects." />
+			</p:dialog>
+			
+		</h:body>
+	</h:form>
+	
+	<script type="text/javascript" charset="UTF-8">
+		loaderIdsElementsPage();
+	</script>
+	
+</sec:isAuthenticated>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<link rel="shortcut icon" type="image/x-icon" href="#{resource['img/favicon/pifrans_logo_02.ico']}"/>
+	<title><ui:insert name="title">Serviços</ui:insert></title>
+
+	<h:outputScript name="jquery/jquery.js" library="primefaces"/>
+	<h:outputStylesheet name="styleMain.css" library="css" />
+	<h:outputScript name="scriptMain.js" library="javascript" />
+</h:head>
+
+<h:body>
+	<ui:include src="/templates/progress-bar.xhtml" />
+	
+	<div id="divImageLogin">
+		<h:graphicImage library="img" name="svg/login_01.svg"
+			styleClass="borderImage" style="height:60px" />
+	</div>
+
+	<div id="divLogoCompany">
+		<h:graphicImage library="img" name="svg/pifrans_logo_02.svg"
+			styleClass="borderImage" style="height:500px" />
+	</div>
+
+	<div id="divErrorLogin">
+		<br />
+		<h:panelGroup rendered="#{!empty param.login_error}">
+			<h:outputLabel
+				rendered="#{SPRING_SECURITY_LAST_EXCEPTION.message == 'Bad credentials'}">
+				<span class="styleSpan">Permissão negada, usuário ou senha
+					incorretos!</span>
+			</h:outputLabel>
+
+			<h:outputLabel
+				rendered="#{SPRING_SECURITY_LAST_EXCEPTION.message == 'Maximum sessions of 1 for this principal exceeded'}">
+				<span class="styleSpan">Este usuário já está logado em outra
+					sessão!</span>
+				<h:commandButton value="Encerrar"
+					style="height:40px; width:100px; background: #CDCDC1; border:1px;"
+					onclick="invalidateSession('#{request.contextPath}', '/public/invalidate-session');" />
+			</h:outputLabel>
+		</h:panelGroup>
+
+		<br />
+		<form id="formLogin" method="post"
+			onsubmit="return validateUserPassword();" name="formLogin"
+			action="#{request.contextPath}/j_spring_security_check">
+			<span style="display: block; padding-top: 2px; text-align: right;">
+				<span style="display: inline-block; width: 50px; text-align: left;">
+					Usuário </span> <input type="text" name="j_username" id="j_username" />
+			</span> <span style="display: block; padding-top: 2px; text-align: right;">
+				<span style="display: inline-block; width: 50px; text-align: left;">
+					Senha </span> <input type="password" name="j_password" id="j_password" />
+			</span> <span style="display: block; padding-top: 2px; text-align: right;">
+				<button type="submit" class="blue"
+					style="height: 40px; width: 100px; background: CDCDC1; border: 1px;"
+					id="btnLogin">Entrar</button>
+			</span>
+		</form>
+	</div>
+
+	<script>
+		$('#j_username').focus();
+	</script>
+</h:body>
+</html>
