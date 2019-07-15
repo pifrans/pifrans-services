@@ -23,6 +23,9 @@
 
 
 		<mapping class="com.pifrans.project.model.classes.Entity" />
+		<mapping class="com.pifrans.project.model.classes.Country" />
+		<mapping class="com.pifrans.project.model.classes.State" />
+		<mapping class="com.pifrans.project.model.classes.City" />
 
 
 		<listener

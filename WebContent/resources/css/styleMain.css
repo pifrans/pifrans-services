@@ -19,6 +19,14 @@
 	height: 10px;
 }
 
+.styleInputCode {
+	width: 115px;
+}
+
+.styleInputName {
+	width: 500px;
+}
+
 /***********************/
 .buttonPesquisa {
 	height: 20px;
@@ -196,6 +204,8 @@ a:focus {
 	padding-top: 5px;
 	padding-left: 5px;
 }
+
+
 /************************/
 #dialogo {
 	position: absolute;
@@ -412,13 +422,9 @@ input[type=submit] {
 	width: 400px;
 }
 
-.estiloIdCastro {
-	width: 115px;
-}
 
-.estyleInputName {
-	width: 500px;
-}
+
+
 
 a.ui-menuitem-link.ui-corner-all.ui-state-hover {
 	background: none repeat scroll 0% 0% transparent;

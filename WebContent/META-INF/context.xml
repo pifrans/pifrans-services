@@ -19,8 +19,8 @@
 		antiJARLocking="false"
 		antiResourceLocking="false" 
 		username="root" 
-		password=""
-		url="jdbc:mysql://localhost:3306/pifrans_services?autoReconnect=true&amp;useSSL=false" />
+		password="Senai"
+		url="jdbc:mysql://localhost:3307/pifrans_services?autoReconnect=true&amp;useSSL=false" />
 
 	<!-- O arquivo Context.xml é lido pela classe org.apache.tomcat.dbcp.dbcp.PoolingDataSource -->
 	<!-- POOL de conexões -->

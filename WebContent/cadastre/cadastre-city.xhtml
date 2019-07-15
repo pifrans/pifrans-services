@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui"> 
+
+	<ui:composition template="/templates/main-template.xhtml">
+		<ui:define name="body">
+			<h:form id="formCadastreCity" prependId="false">
+				<c:set var="isCadastre" value="true" scope="view"/>
+				<p:panel header="Cadastro de cidades" id="pnlCity">
+					<h:panelGrid id="pngCity" columns="3">
+						<h:outputLabel for="iptCode" value="Código" id="otlCode"/>
+						<p:inputText id="iptCode" styleClass="styleInputCode" disabled="true" value="#{cityBeanView.selectedObject.cit_id}"/>
+						<h:outputLabel />
+						
+						<h:outputLabel id="otlName" for="iptName" value="Nome"/>
+						<p:inputText id="iptName" styleClass="styleInputName" required="true" value="#{cityBeanView.selectedObject.cid_description}" maxlength="100" requiredMessage="Informe o nome da cidade!"/>
+						<p:message for="iptName"/>
+						
+						<p:selectOneMenu>
+							<f:selectItems value="#{stateBeanView.states}"/>
+						</p:selectOneMenu>
+					</h:panelGrid>
+				</p:panel>
+				
+				<p:commandButton value="Salvar" ajax="true" action="#{cityBeanView.save}"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</html>

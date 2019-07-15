@@ -61,14 +61,16 @@
 			</div>
 
 			<div id="divContainer">
+				<!-- Logo -->
 				<div id="divLogo">
-					<span style="position: absolute; left: 90px; top: 10px;"
+					<span style="position: absolute; left: 200px; top: -20px;"
 						id="spanLogo"> 
 						<h:graphicImage library="img" style="height: 150px;	width: 150px;"
 							name="svg/pifrans_logo_02.svg" id="ghiLogoMain"	styleClass="borderImage" />
 					</span> 
 				</div>
 				
+				<!-- Menu direito do usuário -->
 				<div id="divTopo">
 					
 					<span id="spanDataLogin"> 
@@ -92,6 +94,7 @@
 					</span>
 				</div>
 				
+				<!-- Ícone do menu esquerdo--> -->
 				<div id="divIconMenuLeft">
 					<span id="spanIconMenuLeft">
 						<h:graphicImage library="img" name="svg/menu_01.svg"  style="width: 15px;"  styleClass="borderImage" id="ghiIconMenuLeft">
@@ -100,6 +103,7 @@
 					</span>
 				</div>
 				
+				<!-- Corpo -->
 				<div id="divBody" class="divBody">
 					<ui:insert name="body" />
 				</div>
@@ -122,8 +126,19 @@
 					</a>
 				</div>
 				
+				<!-- Menu esquerdo -->
 				<div id="divMenuLeft">
 					<p:tieredMenu id="trmLeft" style="width: 185px; border: none; background: none; color: #000;">
+						<sec:ifAnyGranted roles="REGISTER_ACCESS, ADMIN">
+							<p:submenu label="Cadastros" id="sbmRegistrations">
+								<sec:ifAnyGranted roles="CITY_ACCESS, ADMIN">
+									<p:menuitem value="Cidades" id="mntCity" action="/cadastre/cadastre-city.jsf?faces-redirect=true">
+									
+									</p:menuitem>
+								</sec:ifAnyGranted>
+							</p:submenu>
+						</sec:ifAnyGranted>
+						
 						<p:menuitem id="mntStart" value="Início" ajax="true" onclick="redirectPage('#{request.contextPath}', '/restricted/main');"/>
 						<p:menuitem id="mntExit" value="Sair" ajax="true" onclick="javascript:logout('#{request.contextPath}')"/>
 					</p:tieredMenu>

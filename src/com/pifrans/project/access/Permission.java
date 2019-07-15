@@ -6,7 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum Permission {
-	ADMIN("ADMIN", "Administrador"), USER("USER", "Usuário padrão"),
+	ADMIN("ADMIN", "Administrador"), 
+	USER("USER", "Usuário padrão"),
 
 	REGISTER_ACCESS("REGISTER_ACCESS", "Acessar cadastro"),
 
