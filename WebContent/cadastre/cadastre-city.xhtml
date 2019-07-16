@@ -12,6 +12,7 @@
 		<ui:define name="body">
 			<h:form id="formCadastreCity" prependId="false">
 				<c:set var="isCadastre" value="true" scope="view"/>
+				<!-- Formulário -->
 				<p:panel header="Cadastro de cidades" id="pnlCity">
 					<h:panelGrid id="pngCity" columns="3">
 						<h:outputLabel for="iptCode" value="Código: " id="otlCode"/>
@@ -27,16 +28,25 @@
 							<f:selectItems value="#{stateBeanView.states}"/>
 						</p:selectOneMenu>
 						<p:message for="somStates" />
-						
 					</h:panelGrid>
 				</p:panel>
+				
+				<div class="spaceEmpty" />
 				
 				<p:commandButton value="Salvar" ajax="false" action="#{cityBeanView.save}"/>
 				<p:commandButton value="Novo" ajax="false" action="#{cityBeanView.create}"/>
 			</h:form>
 			
-			<!-- Tabela -->
-			<p:dataTable id="dtbCities" value="#{cityBeanView.cities}" var="object" emptyMessage="Não existem valores para exibição!" >
+			<script type="text/javascript" charset="UTF-8">
+				addFocusInField("iptName");
+				managementEnterKey();
+			</script>
+			
+			<div class="spaceEmpty" />
+			
+			<!-- Tabela --> <!-- O rendered está com problema relacionado a exclusão do último item da tabela -->
+			<p:dataTable id="dtbCities" value="#{cityBeanView.cities}" var="object" emptyMessage="Não existem valores para exibição!" rendered="#{cityBeanView.cities.size() > 0}"
+				rows="5" paginator="true" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
 				<p:column>
 					<center>
 						<f:facet name="header">Código</f:facet>
