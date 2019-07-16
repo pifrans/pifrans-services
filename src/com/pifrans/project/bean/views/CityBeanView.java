@@ -1,5 +1,8 @@
 package com.pifrans.project.bean.views;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.bean.ManagedBean;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,16 +18,35 @@ import com.pifrans.project.model.classes.City;
 @ManagedBean(name = "cityBeanView")
 public class CityBeanView extends BeanManagerViewAbstract {
 	private static final long serialVersionUID = 1L;
+	private String url = "/cadastre/cadastre-city.jsf?faces-redirect=true";
+	private List<City> cities = new ArrayList<City>();
 
 	@Autowired
 	private CityController cityController;
 
 	private City selectedObject = new City();
-	
+
 	@Override
 	public String save() throws Exception {
-		System.out.println(selectedObject.getCid_description());
+		selectedObject = cityController.merge(selectedObject);
 		return "";
+	}
+
+	@Override
+	public String create() throws Exception {
+		selectedObject = new City();
+		return url;
+	}
+	
+	@Override
+	public String edit() throws Exception {
+		return url;
+	}
+	
+	@Override
+	public void delete() throws Exception {
+		cityController.delete(selectedObject);
+		create();
 	}
 
 	public City getSelectedObject() {
@@ -34,4 +56,10 @@ public class CityBeanView extends BeanManagerViewAbstract {
 	public void setSelectedObject(City selectedObject) {
 		this.selectedObject = selectedObject;
 	}
+
+	public List<City> getCities() throws Exception {
+		cities = cityController.findList(City.class);
+		return cities;
+	}
+
 }

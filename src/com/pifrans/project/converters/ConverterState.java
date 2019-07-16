@@ -16,7 +16,7 @@ public class ConverterState implements Converter, Serializable {
 
 	@Override
 	public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String code) {
-		if (code != null && code.isEmpty()) {
+		if (code != null && !code.isEmpty()) {
 			return (State) HibernateUtil.getCurrentSession().get(State.class, new Long(code));
 		}
 		return code;

@@ -17,7 +17,7 @@ public class StateController extends CrudImplementation<State> implements CrudIn
 
 	public List<SelectItem> getListState() throws Exception {
 		List<SelectItem> selectItems = new ArrayList<SelectItem>();
-		List<State> states = super.findListByQueryDynamic("FROM state");
+		List<State> states = super.findListByQueryDynamic("FROM State");
 
 		for (State state : states) {
 			selectItems.add(new SelectItem(state, state.getSta_name()));
