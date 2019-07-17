@@ -9,34 +9,35 @@
 <sec:isAuthenticated>
 	<h:head>
 		<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+		<link rel="shortcut icon" type="image/x-icon" href="#{resource['img/svg/pifrans_logo_02.svg']}"/>
 		<title><ui:insert name="title">Serviços</ui:insert></title>
 
-		<h:outputScript name="primefaces.js" library="primefaces"
-			id="otsPrimefaces" />
-		<h:outputScript name="jquery.js" library="primefaces/jquery"
-			id="otsJquery" />
-		<h:outputScript name="jquery-plugins.js" library="primefaces/jquery"
-			id="otsJqueryPlugin" />
-		<h:outputScript name="jquery.cookie.js" library="javascript"
-			id="otsJaqueryCookie" />
-		<h:outputStylesheet name="jquery-ui.css"
-			library="primefaces/jquery/ui" id="othJqueryUi" />
-		<h:outputStylesheet name="primefaces.css" library="primefaces"
-			id="othPrimefaces" />
-		<h:outputScript name="jquery.maskMoney.min.js" library="javascript"
-			id="otsJqueryMaskMoney" />
-		<h:outputScript name="jquery.maskedinput.js" library="javascript"
-			id="otsJqueryMaskedInput" />
-		<h:outputScript name="scriptMain.js" library="javascript"
-			id="otsScriptMain" />
+		
+		<h:outputScript name="jquery.js" library="primefaces/jquery" id="otsJquery" />
+		<h:outputScript name="jquery-plugins.js" library="primefaces/jquery" id="otsJqueryPlugin" />
+		<h:outputScript name="jquery.cookie.js" library="javascript" id="otsJaqueryCookie" />
+		<h:outputScript name="core.js" library="primefaces" id="otsCore" />
+		<h:outputScript name="components.js" library="primefaces" id="otsComponents" />
+		<h:outputStylesheet name="components.css" library="primefaces" id="othComponents" />
+		<h:outputStylesheet name="jquery-ui.css" library="css" id="othJqueryUi" />
+		<h:outputScript name="jquery.maskMoney.min.js" library="javascript"	id="otsJqueryMaskMoney" />
+		<h:outputScript name="jquery.maskedinput.js" library="javascript" id="otsJqueryMaskedInput" />
+		<h:outputScript name="scriptMain.js" library="javascript" id="otsScriptMain" />
+		<h:outputScript name="jsf.js" library="javax.faces"/>
+		<h:outputScript name="googlechart.js" library="javascript"/> 
+		<h:outputScript name="deployJava.js"  library="javascript" />
 	</h:head>
 
+	<!-- 
+		<h:outputStylesheet name="primefaces.css" library="primefaces" id="othPrimefaces" />
+		<h:outputScript name="primefaces.js" library="primefaces" id="otsPrimefaces" />
+		<h:outputStylesheet name="jquery-ui.css" library="primefaces/jquery/ui" id="othJqueryUi" />
+	 -->
 
 	<h:form id="formHeader" prependId="false">
-		<h:outputStylesheet name="styleMain.css" library="css"
-			id="othStyleMain" />
+		<h:outputStylesheet name="styleMain.css" library="css" id="othStyleMain" />
 
-		<h:body>
+		<h:body onload="toggleTableColors()">
 			<script type="text/javascript" charset="UTF-8">
 				$.noConflict();
 				localeDatePtBr();
@@ -54,8 +55,9 @@
 			<ui:include src="/templates/progress-bar.xhtml" />
 
 			<div id="divMessageError">
-				<p:growl id="grlMessage" showDetail="false" sticky="true"
-					redisplay="true" autoUpdate="true" life="6000" />
+				<p:growl id="grlMessage" showDetail="false" sticky="true" redisplay="true" life="6000" >
+					<p:autoUpdate/>
+				</p:growl>
 				<p:tooltip id="totFocus" globalSelector="a, :input, :button"
 					showEvent="focus" hideEvent="blur" />
 			</div>

@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition>
-	<p:ajaxStatus id="ajaxStatus" onstart="PF('statusDialogOk').show()" onsuccess="PF('statusDialogOk').hide()" />
+	<p:ajaxStatus id="ajaxStatus" onstart="PF('statusDialogOk').show()" onsuccess="PF('statusDialogOk').hide()" oncomplete="toggleTableColors()"/>
 	
 	<p:dialog id="dlgAjaxStausOk" modal="true" widgetVar="statusDialogOk"
 		height="200px;" width="200px;" header="Processando"

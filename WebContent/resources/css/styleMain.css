@@ -27,6 +27,16 @@
 	width: 500px;
 }
 
+/* Definido cor das linhas pares */
+.toggleTableColors tr:nth-child(even) {
+	background: #EEE;
+}
+
+/* Definindo cor das Linhas impáres */
+.toggleTableColors tr:nth-child(odd) {
+	background: #B1ACA6
+}
+
 /***********************/
 .buttonPesquisa {
 	height: 20px;
@@ -204,7 +214,6 @@ a:focus {
 	padding-top: 5px;
 	padding-left: 5px;
 }
-
 
 /************************/
 #dialogo {
@@ -421,10 +430,6 @@ input[type=submit] {
 .valorPesquisa {
 	width: 400px;
 }
-
-
-
-
 
 a.ui-menuitem-link.ui-corner-all.ui-state-hover {
 	background: none repeat scroll 0% 0% transparent;

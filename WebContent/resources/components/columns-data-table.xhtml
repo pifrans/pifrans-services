@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui"> 
+
+	<p:column style="width: 100px;">
+		<center>
+			<f:facet name="header">Código</f:facet>
+			<h:outputText value="#{object.cit_id}"/>
+		</center>
+	</p:column>
+	
+	<p:column>
+		<center>
+			<f:facet name="header">Cidade</f:facet>
+			<h:outputText value="#{object.cid_description}"/>
+		</center>
+	</p:column>
+	
+	<p:column>
+		<center>
+			<f:facet name="header">Estado</f:facet>
+			<h:outputText value="#{object.state.sta_name}"/>
+		</center>
+	</p:column>
+	
+	<sec:ifAnyGranted roles="CITY_EDIT, ADMIN">
+		<p:column style="width: 50px;">
+			<center>
+				<f:facet name="header">Editar</f:facet>
+				<p:commandLink id="cmlEditCity" action="#{cityBeanView.edit}" update="@form:formCadastreCity" ajax="true" immediate="true">
+					<h:graphicImage library="img" name="svg/edit_03.svg" styleClass="borderImage" style="height:20px" title="Editar"/>
+					<f:setPropertyActionListener value="#{object}" target="#{cityBeanView.selectedObject}" />
+				</p:commandLink>
+			</center>
+		</p:column>
+	</sec:ifAnyGranted>
+	
+	<sec:ifAnyGranted roles="CITY_DELETE, ADMIN">
+		<p:column style="width: 50px;">
+			<center>
+				<f:facet name="header">Excluir</f:facet>
+				<c:choose>
+					<c:when test="${isCadastre == false}">	
+						<p:commandLink id="cmlDeleteCity" action="#{cityBeanView.delete}" update="dtbObjects" ajax="true" immediate="true" onclick="if(!confirm('Deseja excluir a cidade #{object.cid_description}?')) return false;">
+							<h:graphicImage library="img" name="svg/delete_01.svg" styleClass="borderImage" style="height:20px" title="Excluir"/>
+							<f:setPropertyActionListener value="#{object}" target="#{cityBeanView.selectedObject}" />
+						</p:commandLink>
+					</c:when>
+					<c:otherwise>
+						<p:commandLink id="cmlDeleteCity" action="#{cityBeanView.delete}" update="dtbObjects" ajax="false" immediate="true" onclick="if(!confirm('Deseja excluir a cidade #{object.cid_description}?')) return false;">
+							<h:graphicImage library="img" name="svg/delete_01.svg" styleClass="borderImage" style="height:20px" title="Excluir"/>
+							<f:setPropertyActionListener value="#{object}" target="#{cityBeanView.selectedObject}" />
+						</p:commandLink>
+					</c:otherwise>
+				</c:choose>
+			</center>
+		</p:column>
+	</sec:ifAnyGranted>
+</html>

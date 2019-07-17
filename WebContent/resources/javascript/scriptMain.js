@@ -179,3 +179,25 @@ function managementEnterKey() {
 		});
 	});
 }
+
+function toggleTableColors() {
+	/* recebe uma lista com todos os elementos de dtbObjects com a tag <tr> */
+	var table = document.getElementById("dtbObjects").getElementsByTagName('tr');
+	for (i = 0; i < table.length; i++) {
+		if (i % 2 === 0) {
+			table[i].onmouseover = function() {
+				this.style.background = '#EE2B2B'
+			}
+			table[i].onmouseout = function() {
+				this.style.background = '#EEE'
+			}
+		} else {
+			table[i].onmouseover = function() {
+				this.style.background = '#EE2B2B'
+			}
+			table[i].onmouseout = function() {
+				this.style.background = '#B1ACA6'
+			}
+		}
+	}
+}

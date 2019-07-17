@@ -12,6 +12,7 @@
 		<ui:define name="body">
 			<h:form id="formCadastreCity" prependId="false">
 				<c:set var="isCadastre" value="true" scope="view"/>
+				
 				<!-- Formulário -->
 				<p:panel header="Cadastro de cidades" id="pnlCity">
 					<h:panelGrid id="pngCity" columns="3">
@@ -45,46 +46,10 @@
 			<div class="spaceEmpty" />
 			
 			<!-- Tabela --> <!-- O rendered está com problema relacionado a exclusão do último item da tabela -->
-			<p:dataTable id="dtbCities" value="#{cityBeanView.cities}" var="object" emptyMessage="Não existem valores para exibição!" rendered="#{cityBeanView.cities.size() > 0}"
-				rows="5" paginator="true" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" >
-				<p:column>
-					<center>
-						<f:facet name="header">Código</f:facet>
-						<h:outputText value="#{object.cit_id}"/>
-					</center>
-				</p:column>
-				
-				<p:column>
-					<center>
-						<f:facet name="header">Cidade</f:facet>
-						<h:outputText value="#{object.cid_description}"/>
-					</center>
-				</p:column>
-				
-				<p:column>
-					<center>
-						<f:facet name="header">Estado</f:facet>
-						<h:outputText value="#{object.state.sta_name}"/>
-					</center>
-				</p:column>
-				
-				<p:column>
-					<center>
-						<f:facet name="header">Editar</f:facet>
-						<p:commandLink id="cmlEditCity" action="#{cityBeanView.edit}" update="@form:formCadastreCity" value="Editar" ajax="true" immediate="true">
-							<f:setPropertyActionListener value="#{object}" target="#{cityBeanView.selectedObject}" />
-						</p:commandLink>
-					</center>
-				</p:column>
-				
-				<p:column>
-					<center>
-						<f:facet name="header">Excluir</f:facet>
-						<p:commandLink id="cmlDeleteCity" action="#{cityBeanView.delete}" update="dtbCities" value="Excluir" ajax="true" immediate="true">
-							<f:setPropertyActionListener value="#{object}" target="#{cityBeanView.selectedObject}" />
-						</p:commandLink>
-					</center>
-				</p:column>
+			<p:dataTable id="dtbObjects" value="#{cityBeanView.cities}" var="object" emptyMessage="Não existem valores para exibição!" rendered="#{cityBeanView.cities.size() > 0}"
+				rows="5" paginator="true" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowStyleClass="red" rowsPerPageTemplate="5, 10, 15, 20, 30, 40, 50" styleClass="toggleTableColors" >
+				<ui:include src="/resources/components/columns-data-table.xhtml" />
 			</p:dataTable>
 			
 		</ui:define>
