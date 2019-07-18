@@ -92,6 +92,10 @@ public abstract class BeanViewAbstract implements ActionViewStandard {
 		statusOperation(StatusPersistence.SUCCESS);
 	}
 
+	protected void successfulOperation() throws Exception {
+		statusOperation(StatusPersistence.SUCCESSFUL_OPERATION);
+	}
+
 	protected void error() throws Exception {
 		statusOperation(StatusPersistence.ERROR);
 	}

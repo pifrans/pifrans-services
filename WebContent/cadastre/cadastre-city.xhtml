@@ -34,14 +34,12 @@
 				
 				<div class="spaceEmpty" />
 				
-				<p:commandButton value="Salvar" ajax="false" action="#{cityBeanView.save}"/>
-				<p:commandButton value="Novo" ajax="false" action="#{cityBeanView.create}"/>
+				<util:buttons-crud managedBeanView="#{cityBeanView}" fieldsReload=":formMain:grlMessage, dtbObjects" 
+					buttonNew="#{contextBean.isAccess('CITY_NEW', 'ADMIN')}" 
+					buttonSave="#{contextBean.isAccess('CITY_SAVE', 'ADMIN') and cityBeanView.selectedObject.cit_id == null}"
+					buttonUpdate="#{contextBean.isAccess('CITY_EDIT', 'ADMIN') and cityBeanView.selectedObject.cit_id != null}">
+				</util:buttons-crud>
 			</h:form>
-			
-			<script type="text/javascript" charset="UTF-8">
-				addFocusInField("iptName");
-				managementEnterKey();
-			</script>
 			
 			<div class="spaceEmpty" />
 			
@@ -52,6 +50,11 @@
 				<ui:include src="/resources/components/columns-data-table.xhtml" />
 			</p:dataTable>
 			
+			<script type="text/javascript" charset="UTF-8">
+				addFocusInField("iptName");
+				managementEnterKey();
+				toggleTableColors();
+			</script>
 		</ui:define>
 	</ui:composition>
 </html>

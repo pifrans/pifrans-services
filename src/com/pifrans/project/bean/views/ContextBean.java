@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
@@ -57,6 +58,20 @@ public class ContextBean implements Serializable {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		return externalContext;
+	}
+
+	/*
+	 * Verifica se o usuário logado tem acesso ao determinado conteúdo
+	 */
+	public boolean isAccess(String... accesses) {
+		for (String access : accesses) {
+			for (GrantedAuthority grantedAuthority : getAuthentication().getAuthorities()) {
+				if (grantedAuthority.getAuthority().trim().equals(access.trim())) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 
 }

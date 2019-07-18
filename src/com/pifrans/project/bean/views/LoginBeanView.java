@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.pifrans.framework.interfaces.crud.CrudInterface;
 import com.pifrans.project.bean.general.BeanManagerViewAbstract;
 import com.pifrans.project.general.controllers.SessionController;
 import com.pifrans.services.interfaces.ServiceLogin;
@@ -80,6 +81,18 @@ public class LoginBeanView extends BeanManagerViewAbstract {
 		}
 
 		requestContext.addCallbackParam("loggedIn", loggedIn);
+	}
+
+	@Override
+	protected Class<?> getClassImplementation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	protected CrudInterface<?> getController() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

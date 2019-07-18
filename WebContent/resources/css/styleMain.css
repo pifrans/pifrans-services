@@ -37,6 +37,13 @@
 	background: #B1ACA6
 }
 
+.buttons {
+	height: 40px;
+	width: 100px;
+	background: #CDCDC1;
+	border: 1px solid #FFFFFF;
+}
+
 /***********************/
 .buttonPesquisa {
 	height: 20px;

@@ -14,6 +14,8 @@ public abstract class Message extends FacesContext implements Serializable {
 	public static void responseOperation(StatusPersistence statusPersistence) {
 		if (statusPersistence != null && statusPersistence.equals(StatusPersistence.SUCCESS)) {
 			success();
+		} else if (statusPersistence != null && statusPersistence.equals(StatusPersistence.SUCCESSFUL_OPERATION)) {
+			successfulOperation();
 		} else if (statusPersistence != null && statusPersistence.equals(StatusPersistence.REFERENCED_OBJECT)) {
 			messageSeverityFatal(StatusPersistence.REFERENCED_OBJECT.toString());
 		} else {
@@ -37,13 +39,13 @@ public abstract class Message extends FacesContext implements Serializable {
 
 	public static void success() {
 		if (isFacesContext()) {
-			messageSeverityFatal(Constant.SUCCESS);
+			messageSeverityInfo(Constant.SUCCESS);
 		}
 	}
 
 	public static void successfulOperation() {
 		if (isFacesContext()) {
-			messageSeverityFatal(Constant.SUCCESSFUL_OPERATION);
+			messageSeverityInfo(Constant.SUCCESSFUL_OPERATION);
 		}
 	}
 
