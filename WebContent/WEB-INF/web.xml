@@ -14,7 +14,7 @@
 
 	<!-- Invalida a sessão em 15 minutos se não estiver em uso -->
 	<session-config>
-		<session-timeout>15</session-timeout>
+		<session-timeout>30</session-timeout>
 		<tracking-mode>COOKIE</tracking-mode>
 	</session-config>
 

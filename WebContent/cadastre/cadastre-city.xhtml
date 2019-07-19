@@ -10,6 +10,34 @@
 
 	<ui:composition template="/templates/main-template.xhtml">
 		<ui:define name="body">
+			<!-- Relatório em PDF -->
+			<h:commandLink immediate="true">
+				<f:setPropertyActionListener value="1" target="#{cityBeanView.typeReport}" />
+				<p:fileDownload value="#{cityBeanView.fileReport}" />
+				<h:graphicImage library="img" name="svg/pdf_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em PDF"/>
+			</h:commandLink>
+			
+			<!-- Relatório em XLSX -->
+			<h:commandLink immediate="true">
+				<f:setPropertyActionListener value="2" target="#{cityBeanView.typeReport}" />
+				<p:fileDownload value="#{cityBeanView.fileReport}" />
+				<h:graphicImage library="img" name="svg/xlsx_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em XLSX"/>
+			</h:commandLink>
+			
+			<!-- Relatório em HTML -->
+			<h:commandLink immediate="true">
+				<f:setPropertyActionListener value="3" target="#{cityBeanView.typeReport}" />
+				<p:fileDownload value="#{cityBeanView.fileReport}" />
+				<h:graphicImage library="img" name="svg/html_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em HTML"/>
+			</h:commandLink>
+			
+			<!-- Relatório em ODS -->
+			<h:commandLink immediate="true">
+				<f:setPropertyActionListener value="4" target="#{cityBeanView.typeReport}" />
+				<p:fileDownload value="#{cityBeanView.fileReport}" />
+				<h:graphicImage library="img" name="svg/ods_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em ODS"/>
+			</h:commandLink>
+			
 			<h:form id="formCadastreCity" prependId="false">
 				<c:set var="isCadastre" value="true" scope="view"/>
 				
@@ -17,15 +45,15 @@
 				<p:panel header="Cadastro de cidades" id="pnlCity">
 					<h:panelGrid id="pngCity" columns="3">
 						<h:outputLabel for="iptCode" value="Código: " id="otlCode"/>
-						<p:inputText id="iptCode" styleClass="styleInputCode" disabled="true" value="#{cityBeanView.selectedObject.cit_id}"/>
+						<p:inputText id="iptCode" styleClass="styleFieldsForm" disabled="true" value="#{cityBeanView.selectedObject.cit_id}"/>
 						<h:outputLabel />
 						
 						<h:outputLabel id="otlName" for="iptName" value="Nome: "/>
-						<p:inputText id="iptName" styleClass="styleInputName" required="true" value="#{cityBeanView.selectedObject.cid_description}" maxlength="100" requiredMessage="Informe o nome da cidade!"/>
+						<p:inputText id="iptName" styleClass="styleFieldsForm" required="true" value="#{cityBeanView.selectedObject.cid_description}" maxlength="100" requiredMessage="Informe o nome da cidade!"/>
 						<p:message for="iptName"/>
 						
 						<h:outputLabel id="otlStates" for="somStates" value="Estados: "/>
-						<p:selectOneMenu id="somStates" required="true" style="width: 200px;" requiredMessage="Selecione o estado!" value="#{cityBeanView.selectedObject.state}">
+						<p:selectOneMenu id="somStates" styleClass="styleFieldsForm" required="true" requiredMessage="Selecione o estado!" value="#{cityBeanView.selectedObject.state}">
 							<f:selectItems value="#{stateBeanView.states}"/>
 						</p:selectOneMenu>
 						<p:message for="somStates" />

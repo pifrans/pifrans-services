@@ -14,7 +14,8 @@ import com.pifrans.project.util.all.BeanViewAbstract;
 @Component
 public abstract class BeanReportView extends BeanViewAbstract {
 	private static final long serialVersionUID = 1L;
-
+	
+	
 	protected StreamedContent fileReport;
 	protected int typeReport;
 	protected List<?> listDataBeanCollectionReport;

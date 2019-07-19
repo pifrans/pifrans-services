@@ -98,7 +98,7 @@ public class ReportUtil implements Serializable {
 			break;
 		case REPORT_HTML:
 			typeFileExport = new JRHtmlExporter();
-			extensionFileExport = EXTENSION_PDF;
+			extensionFileExport = EXTENSION_HTML;
 			break;
 		case REPORT_XLSX:
 			typeFileExport = new JRXlsxExporter();

@@ -135,20 +135,15 @@
 	</bean>
 
 
-	<bean id="reportUtil"
-		class="com.pifrans.project.report.util.ReportUtil" />
-	<bean id="utilFramework"
-		class="com.pifrans.framework.util.FrameworkUtil" scope="session" />
+	<bean id="reportUtil" class="com.pifrans.project.report.util.ReportUtil" />
+	<bean id="utilFramework" class="com.pifrans.framework.util.FrameworkUtil" scope="session" />
 
 	<!-- Controllers -->
-	<bean id="sessionController"
-		class="com.pifrans.project.general.controllers.SessionControllerImplementation"
-		scope="singleton" />
+	<bean id="sessionController" class="com.pifrans.project.general.controllers.SessionControllerImplementation" scope="singleton" />
 
 
 	<!-- DAOs -->
-	<bean id="repositoryLogin"
-		class="com.pifrans.dao.implementations.DaoLogin" scope="singleton" />
+	<bean id="repositoryLogin" class="com.pifrans.dao.implementations.DaoLogin" />
 
 
 	<!-- Services -->

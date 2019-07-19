@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 
+import org.primefaces.model.StreamedContent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -81,6 +82,14 @@ public class CityBeanView extends BeanManagerViewAbstract {
 
 	public void setSelectedObject(City selectedObject) {
 		this.selectedObject = selectedObject;
+	}
+
+	@Override
+	public StreamedContent getFileReport() throws Exception {
+		super.setNameReportIn("report_city");
+		super.setNameReportOut("report_city");
+		super.setListDataBeanCollectionReport(cityController.findList(getClassImplementation()));
+		return super.getFileReport();
 	}
 
 	public List<City> getCities() throws Exception {

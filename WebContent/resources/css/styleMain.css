@@ -19,12 +19,8 @@
 	height: 10px;
 }
 
-.styleInputCode {
-	width: 115px;
-}
-
-.styleInputName {
-	width: 500px;
+.styleFieldsForm {
+	width: 400px;
 }
 
 /* Definido cor das linhas pares */
