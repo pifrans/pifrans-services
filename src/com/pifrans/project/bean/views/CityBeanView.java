@@ -113,4 +113,9 @@ public class CityBeanView extends BeanManagerViewAbstract {
 		return cityController;
 	}
 
+	@Override
+	public void queryEntity() throws Exception {
+		// TODO Auto-generated method stub
+		super.queryEntity();
+	}
 }

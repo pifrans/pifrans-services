@@ -140,6 +140,7 @@
 
 	<!-- Controllers -->
 	<bean id="sessionController" class="com.pifrans.project.general.controllers.SessionControllerImplementation" scope="singleton" />
+	<bean id="controller" name="controller" class="com.pifrans.framework.controller.crud.Controller"/>
 
 
 	<!-- DAOs -->

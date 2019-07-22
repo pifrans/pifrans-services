@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:sec="http://www.springframework.org/security/facelets/tags"
+	xmlns:util="http://java.sun.com/jsf/composite/components"
+	xmlns:composite="http://java.sun.com/jsf/composite"
+	xmlns:p="http://primefaces.org/ui"> 
+
+	<h:form id="formSearch" prependId="false">
+		<composite:interface displayName="search" name="search">
+			<composite:attribute name="managedBeanView" required="true" />
+			<composite:attribute name="buttonNew" required="true" />
+			<composite:attribute name="menuReports" required="false" default="false" />
+			<composite:attribute name="nameSearch" required="true"/>
+			<composite:attribute name="columnsDataTable" required="true" />
+		</composite:interface>
+		
+		<composite:implementation>
+			<c:set var="isCadastre" value="false" scope="view" />
+			
+			<h:panelGrid columns="2">
+				<h:column rendered="#{cc.attrs.buttonNew}">
+					<p:commandButton value="Novo" id="cmbNew" styleClass="buttons" ajax="false" immediate="true" action="#{cc.attrs.managedBeanView.create()}"/>
+				</h:column>
+				
+				<h:column rendered="#{cc.attrs.menuReports}">
+					<!-- Relatório -->
+					<util:menu-reports managedBeanView="#{cc.attrs.managedBeanView}" />
+				</h:column>
+			</h:panelGrid>
+
+			<p:spacer height="20px"/>
+			
+			<p:panel id="pnlSearch" header="#{cc.attrs.nameSearch}">
+				<h:panelGrid id="pngSearch" columns="7">
+					<h:outputLabel for="somTypeSearch" id="otlTypeSearch" value="Pesquisar por: " />
+					<p:selectOneMenu id="somTypeSearch" styleClass="styleFieldsForm" onchange="addMaskSearch(this.value);" value="#{cc.attrs.managedBeanView.objectQueryFieldSelected}">
+						<f:selectItems var="sliTypes" id="sliTypes" value="#{cc.attrs.managedBeanView.listFieldSearch}" itemLabel="#{objectQueryFieldSelected.description}" itemValue="#{objectQueryFieldSelected.typeClass}" />
+					</p:selectOneMenu>
+					
+					<h:outputLabel for="somCondition" id="otlCondition" value="Onde: "/>
+					<p:selectOneMenu id="somCondition" styleClass="styleFieldsForm" value="#{cc.attrs.managedBeanView.conditionSearchSelected}">
+						<f:selectItems id="sliCondition" value="#{cc.attrs.managedBeanView.listConditionSearch}" />
+					</p:selectOneMenu>
+					
+					<p:inputText id="iptSearch" onblur="removeEmptySpace(event);" onkeypress="startSearchWithEnter(event, this);" immediate="false" value="#{cc.attrs.managedBeanView.valueSearch}" maxlength="65"/>
+					
+					<p:commandButton id="cmbSearch" value="Pesquisar" ajax="true" process="@this, pngSearch" onsuccess="addFocusInField('iptSearch');" oncomplete="addFocusInField('iptSearch');" 
+						update=":formMain:grlMessage, " actionListener="#{cc.attrs.managedBeanView.queryEntity}" />
+				</h:panelGrid>
+			</p:panel>
+			
+			<p:spacer />
+			
+			<p:dataTable id="dtbObjects" rendered="true" value="#{cc.attrs.managedBeanView.cities}" var="object" rows="10" widgetVar="dtbObjects" paginatorPosition="botton" lazy="true" paginator="true" 
+				emptyMessage="Não existem valores para exibição!" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+				rowStyleClass="red" rowsPerPageTemplate="5, 10, 15, 20, 30, 40, 50" styleClass="toggleTableColors">
+				<ui:include src="#{cc.attrs.columnsDataTable}" />
+			</p:dataTable>
+			
+			<script type="text/javascript" charset="UTF-8">
+				var somTypeSearch = getValueElementByIdJQuery('somTypeSearch');
+				var somCondition = getValueElementByIdJQuery('somCondition');
+				var iptSearch = getValueElementByIdJQuery('iptSearch');
+				
+				$(iptSearch).keypress(permitNumber);
+				
+				$(somTypeSearch + ' :nth-child(1)').prop('selected', true);
+				$(somCondition + ' :nth-child(1)').prop('selected', true);
+				$(iptSearch).val('');
+				
+				addMaskSearch($(somTypeSearch).val()); 
+				addFocusInField('iptSearch');
+				
+				//chama o pesquisar ao dar enter na pesquisa
+				function startSearchWithEnter(event, button){
+					if (event.keyCode == 13){
+						event.preventDefault();    
+						addFocusInField('cmbSearch');
+						
+						var cmbSearch = getValueElementByIdJQuery('cmbSearch');
+						$(cmbSearch).click();
+					}
+				}
+			</script>
+		</composite:implementation>
+	</h:form>
+</html>

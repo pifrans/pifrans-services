@@ -33,7 +33,7 @@
 		<p:column style="width: 50px;">
 			<center>
 				<f:facet name="header">Editar</f:facet>
-				<p:commandLink id="cmlEditCity" action="#{cityBeanView.edit}" update="@form:formCadastreCity" ajax="true" immediate="true">
+				<p:commandLink id="cmlEditCity" action="#{cityBeanView.edit}" update="@form" ajax="true" immediate="true">
 					<h:graphicImage library="img" name="svg/edit_03.svg" styleClass="borderImage" style="height:20px" title="Editar"/>
 					<f:setPropertyActionListener value="#{object}" target="#{cityBeanView.selectedObject}" />
 				</p:commandLink>

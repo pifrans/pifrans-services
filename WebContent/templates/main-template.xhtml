@@ -135,7 +135,7 @@
 						<sec:ifAnyGranted roles="REGISTER_ACCESS, ADMIN">
 							<p:submenu label="Cadastros" id="sbmRegistrations">
 								<sec:ifAnyGranted roles="CITY_ACCESS, ADMIN">
-									<p:menuitem value="Cidades" id="mntCity" action="/cadastre/cadastre-city.jsf?faces-redirect=true">
+									<p:menuitem value="Cidades" id="mntCity" immediate="true" action="#{cityBeanView.redirectFindEntity}">
 									
 									</p:menuitem>
 								</sec:ifAnyGranted>

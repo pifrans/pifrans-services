@@ -1,4 +1,10 @@
 var arrayIdsElementsPage = new Array;
+var idundefined = 'idundefined';
+var classTypeString = 'java.lang.String';
+var classTypeLong = 'java.lang.Long';
+var classTypeDate = 'java.util.Date';
+var classTypeBoolean = 'java.lang.Boolean';
+var classTypeBigDecimal = 'java.math.BigDecimal';
 
 /**
  * Carrega um array global com os ids de todos os componentes da página Para ter
@@ -202,5 +208,100 @@ function toggleTableColors() {
 				}
 			}
 		}
+	}
+}
+
+/**
+ * primefaces.js cï¿½digo fonte
+ * escapeClientId:function(a){return"#"+a.replace(/:/g,"\\:")}
+ * 
+ * @param id
+ * @returns id
+ */
+function getValueElementByIdJQuery(id) {
+	var id = getValueElementById(id);
+	if (id.trim() != idundefined) {
+		return PrimeFaces.escapeClientId(id);
+	}
+	return idundefined;
+}
+
+function permitNumber(e) {
+	var unicode = e.charCode ? e.charCode : e.keyCode;
+	if (unicode != 8 && unicode != 9) {
+		if (unicode < 48 || unicode > 57) {
+			return false;
+		}
+	}
+}
+
+/**
+ * Gera automaticamente máscara para a tela de pesquisa var classTypeString =
+ * 'java.lang.String'; var classTypeLong = 'java.lang.Long'; var classTypeDate =
+ * 'java.util.Date'; var classTypeBoolean = 'java.lang.Boolean'; var
+ * classTypeBigDecimal = 'java.math.BigDecimal';
+ * 
+ * @param elemento
+ */
+function addMaskSearch(element) {
+	var id = getValueElementByIdJQuery('iptSearch');
+	var values = element.split("*");
+	var fieldEmpty = values[0];
+	var typeField = values[1];
+	
+	console.log(id);
+	console.log(element);
+	console.log(values);
+	console.log(fieldEmpty);
+	console.log(typeField);
+
+	$(id).unmask();
+	$(id).unbind("keypress");
+	$(id).unbind("keyup");
+	$(id).unbind("focus");
+	$(id).val('');
+
+	if (id != idundefined) {
+		jQuery(function($) {
+			if (typeField === classTypeLong) {
+				$(id).keypress(permitNumber);
+			} else if (typeField === classTypeBigDecimal) {
+				$(id).maskMoney({
+					precision : 4,
+					decimal : ",",
+					thousands : "."
+				});
+			} else if (typeField === classTypeDate) {
+				$(id).mask('99/99/9999');
+			} else {
+				$(id).unmask();
+				$(id).unbind("keypress");
+				$(id).unbind("keyup");
+				$(id).unbind("focus");
+				$(id).val('');
+			}
+			addFocusInField("iptSearch");
+		});
+	}
+}
+
+function removeEmptySpace(value) {
+	if (value != undefined && value.value != undefined) {
+		if (value.value.trim() === '') {
+			value.value = '';
+		} else {
+			value.value = value.value.trim();
+		}
+	}
+}
+
+// Inicia a pesquisar ao clicar enter na pesquisa
+function startSearchWithEnter(event, button) {
+	if (event.keyCode == 13) {
+		event.preventDefault();
+		addFocusInField('cmbSearch');
+
+		var cmbSearch = getValueElementByIdJQuery('cmbSearch');
+		$(cmbSearch).click();
 	}
 }

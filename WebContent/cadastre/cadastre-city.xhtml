@@ -10,33 +10,6 @@
 
 	<ui:composition template="/templates/main-template.xhtml">
 		<ui:define name="body">
-			<!-- Relatório em PDF -->
-			<h:commandLink immediate="true">
-				<f:setPropertyActionListener value="1" target="#{cityBeanView.typeReport}" />
-				<p:fileDownload value="#{cityBeanView.fileReport}" />
-				<h:graphicImage library="img" name="svg/pdf_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em PDF"/>
-			</h:commandLink>
-			
-			<!-- Relatório em XLSX --> 
-			<h:commandLink immediate="true">
-				<f:setPropertyActionListener value="2" target="#{cityBeanView.typeReport}" />
-				<p:fileDownload value="#{cityBeanView.fileReport}" />
-				<h:graphicImage library="img" name="svg/xlsx_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em XLSX"/>
-			</h:commandLink>
-			
-			<!-- Relatório em HTML -->
-			<h:commandLink immediate="true">
-				<f:setPropertyActionListener value="3" target="#{cityBeanView.typeReport}" />
-				<p:fileDownload value="#{cityBeanView.fileReport}" />
-				<h:graphicImage library="img" name="svg/html_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em HTML"/>
-			</h:commandLink>
-			
-			<!-- Relatório em ODS -->
-			<h:commandLink immediate="true">
-				<f:setPropertyActionListener value="4" target="#{cityBeanView.typeReport}" />
-				<p:fileDownload value="#{cityBeanView.fileReport}" />
-				<h:graphicImage library="img" name="svg/ods_02.svg" styleClass="borderImage" style="height:40px" title="Relatório em ODS"/>
-			</h:commandLink>
 			
 			<h:form id="formCadastreCity" prependId="false">
 				<c:set var="isCadastre" value="true" scope="view"/>
@@ -75,7 +48,7 @@
 			<p:dataTable id="dtbObjects" value="#{cityBeanView.cities}" var="object" emptyMessage="Não existem valores para exibição!" rendered="#{cityBeanView.cities.size() > 0}"
 				rows="5" paginator="true" paginatorPosition="bottom" paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 				rowStyleClass="red" rowsPerPageTemplate="5, 10, 15, 20, 30, 40, 50" styleClass="toggleTableColors" >
-				<ui:include src="/resources/components/columns-data-table.xhtml" />
+				<ui:include src="/resources/components/columns-data-table-city.xhtml" />
 			</p:dataTable>
 			
 			<script type="text/javascript" charset="UTF-8">

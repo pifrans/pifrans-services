@@ -26,11 +26,11 @@ public class City implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@IdentifyFieldSearch(fieldDescription = "Código", fieldSearch = "cit_id")
+	@IdentifyFieldSearch(fieldDescription = "CÃ³digo", fieldSearch = "cit_id", fieldMain = 1)
 	private Long cit_id;
 
 	@Column(length = 100, nullable = false)
-	@IdentifyFieldSearch(fieldDescription = "Descrição", fieldSearch = "cid_description", fieldMain = 1)
+	@IdentifyFieldSearch(fieldDescription = "DescriÃ§Ã£o", fieldSearch = "cid_description", fieldMain = 2)
 	private String cid_description;
 
 	@Basic
